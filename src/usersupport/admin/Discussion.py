@@ -7,6 +7,8 @@ class DiscussionAdmin(admin.ModelAdmin):
     list_display = (
         "id",
         "user",
+        "user_ref", 
+        "ref_col",
         "history",
         "mes_id",
     )
