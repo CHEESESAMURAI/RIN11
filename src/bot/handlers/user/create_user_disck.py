@@ -25,9 +25,13 @@ async def user_start(message: types.Message):
         )
         return
     name = message.from_user.first_name
+    user_ref = message.text[7:]
+    ref_col = 0
     second_name = message.from_user.last_name if message.from_user.last_name else ""
     username = message.from_user.username if message.from_user.username else "username отсутствует"
     await user_db.add_user(
+        user_ref=user_ref,
+        ref_col=ref_col,
         user_id=user_id,
         name=name,
         second_name=second_name,
