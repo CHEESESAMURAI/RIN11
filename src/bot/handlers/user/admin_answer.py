@@ -27,7 +27,12 @@ async def send_code(call: types.CallbackQuery):
     user_id = call.data.replace("code_", "")
     await send_mes(user_id, td.TEXT_ANSWER_2)
     await call.answer()
-
+    
+    #user_ref: TelegramUser = await user_db.select_user(
+    #    user_ref=user_ref
+    #)
+   # ref_col
+    
     user: TelegramUser = await user_db.select_user(
         user_id=user_id
     )
