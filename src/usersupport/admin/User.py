@@ -10,6 +10,8 @@ class UsersAdmin(admin.ModelAdmin):
         "user_id",
         "user_role",
         "chanel_id",
+        "user_ref", 
+        "ref_col",
         "chat_id",
         "created_at",
         "updated_at",
