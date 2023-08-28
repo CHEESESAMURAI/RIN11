@@ -10,8 +10,12 @@ from bot.data import text_data as td
 from bot.keyboards import inline as ik
 
 
+
+
 async def user_start(message: types.Message):
+
     user_id = message.from_user.id
+
     admins = await user_db.select_all_admins()
     a_list = [a.user_id for a in admins]
     if user_id in a_list:
@@ -25,20 +29,24 @@ async def user_start(message: types.Message):
         )
         return
     name = message.from_user.first_name
-    user_ref = message.text[7:]
+    user_ref = 0
+    if str(message.text[7:]) != "":
+        user_ref = int(message.text[7:])
     ref_col = 0
     second_name = message.from_user.last_name if message.from_user.last_name else ""
     username = message.from_user.username if message.from_user.username else "username отсутствует"
     await user_db.add_user(
-        user_ref=user_ref,
-        ref_col=ref_col,
         user_id=user_id,
         name=name,
+        user_ref=user_ref,
+        ref_col=ref_col,
         second_name=second_name,
         username=username,
         role="пользователь"
-    )
+        )
     user = await user_db.select_user(user_id=user_id)
+
+
     admins = await user_db.select_all_admins()
     a_list = {a.chanel_id: a.chat_id for a in admins}
     sent_q_id_dict = {}
@@ -50,7 +58,7 @@ async def user_start(message: types.Message):
         )
         sent_q_id_dict[a_list[admin]] = m.message_id + 1
         await bot.delete_message(chat_id=a_list[admin], message_id=m.message_id)
-
+        
     mes_id = str(sent_q_id_dict)
     d = await ud_db.add_discussion(user=user, mes_id=mes_id)
     # await ud_db.add_mes_id(user=user, pk=user.id, mes_id=mes_id)
@@ -58,16 +66,19 @@ async def user_start(message: types.Message):
     await send_menu(message)
 
 
+
 async def send_menu(message: types.Message):
     await bot.delete_message(
         chat_id=message.from_user.id,
         message_id=message.message_id
     )
+    #print("popaaaaaa")
+    #keyboard= await ik.get_user_menu()
+    #print(keyboard)
+    #print(message_id)
     mes = await bot.send_message(
         chat_id=message.from_user.id,
         text=td.MAIN_TEXT,
         reply_markup=await ik.get_user_menu()
     )
-    photo = open("C:\Users\BLESS\PycharmProjects\BEKVAM1\src\hello - cat.mp4", 'rb')
-    await bot.send_animation(message.chat.id, photo)
 
