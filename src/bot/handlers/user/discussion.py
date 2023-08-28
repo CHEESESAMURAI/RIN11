@@ -59,7 +59,7 @@ async def append_d(message: types.Message, state: FSMContext):
     )
     history = f"{user_discussion.history if user_discussion.history else ''}\n{'U: ' + text}"
     await ud_db.add_history(user=user, history=history)
-    admins = await user_db.select_all_admins()
+     admins = await user_db.select_all_admins()
     a_list = {a.chanel_id: a.chat_id for a in admins}
     mes_id = eval(user_discussion.mes_id)
     for admin in a_list:
@@ -116,7 +116,7 @@ async def append_photo(message: types.Message):
                 reply_markup=await ik.get_admin_menu(user_id))
             await del_kb(a_list[admin])
         user_data[a_list[admin]] = mes.message_id
-
+        
 
 async def del_kb(user_id):
     try:
