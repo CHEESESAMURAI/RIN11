@@ -25,6 +25,40 @@ async def answer_from_admin(message: types.Message):
         text=answer,
     )
 
+async def plus(call: types.CallbackQuery):
+    global ref_col
+    global ref_coll
+    global klava
+
+    user_id = call.data.replace("plus_", "",)
+    await bot.send_message(user_id,"ПОЗДРАВЛЯЮ 🎉🎉🎉", reply_markup = await ik.reg_ref())
+    await call.answer()
+
+    user: TelegramUser = await user_db.select_user(
+        user_id=user_id
+    )
+
+    ref_id=TelegramUser.objects.filter(user_id=user_id).first().user_ref
+    print(ref_id)
+
+    user_ref_coll = TelegramUser.objects.filter(user_id=ref_id).first().ref_col
+
+    new_ref_col = int(float(user_ref_coll)) + 1
+
+    TelegramUser.objects.filter(user_id=ref_id).update(ref_col=new_ref_col)
+
+
+    d: UserDiscussion = await ud_db.select_discussion(user=user)
+    admins = await user_db.select_all_admins()
+    a_list = {a.chanel_id: a.chat_id for a in admins}
+    mes_id = eval(d.mes_id)
+    for admin in a_list:
+        await bot.send_message(
+            chat_id=a_list[admin],
+            text=td.SUCCESS_MESSAGE_CARD,
+            reply_to_message_id=mes_id[a_list[admin]],
+
+        )
 
 
 async def send_code(call: types.CallbackQuery):
