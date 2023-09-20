@@ -25,7 +25,10 @@ def setup(dp: Dispatcher):
     dp.register_message_handler(create_user_disck.send_menu, filters.Command("menu"))
     # admin answers
     dp.register_callback_query_handler(admin_answer.send_code, lambda call: call.data.startswith("code_"))
+    dp.register_callback_query_handler(admin_answer.plus, lambda call: call.data.startswith("plus_"))
+    dp.register_callback_query_handler(admin_answer.promo, lambda call: call.data.startswith("code2_"))
     dp.register_callback_query_handler(admin_answer.access_denied, lambda call: call.data.startswith("denied_"))
+    dp.register_callback_query_handler(admin_answer.access_denied2, lambda call: call.data.startswith("denied2_"))
     dp.register_message_handler(
         admin_answer.answer_from_admin, lambda message: message.reply_to_message
     )
