@@ -23,7 +23,6 @@ async def get_user_menu():
     keyboard.add(
         InlineKeyboardButton("🎓 О проекте",callback_data="act_1"),
         InlineKeyboardButton("😉 Приведи друга",callback_data="act_2"),
-        InlineKeyboardButton("💻Социальные сети",callback_data="act_15"),
         InlineKeyboardButton("✔ Зарегистрироваться на курс",callback_data="act_3")
     )
     return keyboard
@@ -47,18 +46,21 @@ async def final():
     keyboard = InlineKeyboardMarkup(row_width=1)
     keyboard.add(
         InlineKeyboardButton(text="🔙 Назад",callback_data="back"),
-        InlineKeyboardButton(text="✔ Зарегистрироваться на Госуслуги",url="https://www.gosuslugi.ru/futurecode?organization=44&view=online"),
+        InlineKeyboardButton(text="✔ Зарегистрироваться на Госуслуги",url="https://www.gosuslugi.ru/futurecode?view=online&organization=44&sortKey=cfRating"),
         InlineKeyboardButton(text="📷 Загрузить скриншот",callback_data="act_14"),
     )
     return keyboard
-
 async def course():
     keyboard = InlineKeyboardMarkup(row_width=1)
     keyboard.add(
         InlineKeyboardButton("🤖 Telegram-боты на Python",callback_data="act_4"),
         InlineKeyboardButton("🎮 Разработка 2d-игр на Python",callback_data="act_5"),
+        InlineKeyboardButton("🦾 П риручи искусственный интеллект",callback_data="act_51"),
+        InlineKeyboardButton("📑 Разработка парсеров на Python",callback_data="act_52"),
+        InlineKeyboardButton("🎨 Разработка графических интерфейсов",callback_data="act_53"),
+        InlineKeyboardButton("🧑<200d>💻 Этичный хакинг на Python",callback_data="act_54"),
         InlineKeyboardButton(text="🔙 Назад ",callback_data="back"),
-     )
+    )
     return keyboard
 
 async def reg_ref():
@@ -66,6 +68,7 @@ async def reg_ref():
     keyboard.add(
         InlineKeyboardButton("🔗 Реферальное приглашение",callback_data="act_6"),
         InlineKeyboardButton("🎁 Обменять баллы",callback_data="act_9"),
+        InlineKeyboardButton("📋 Условия обмена баллов",callback_data="act_91"),
         InlineKeyboardButton("📝 Список приглашенных",callback_data="act_10"),
         InlineKeyboardButton("✔ Зарегистрироваться на курс",callback_data="act_3"),
     )
@@ -81,7 +84,7 @@ async def take_fio():
 async def take_num():
     keyboard = InlineKeyboardMarkup()
     keyboard.add(
-        InlineKeyboardButton("✅  Я написал свой номер телефона",callback_data="act_13"),
+        InlineKeyboardButton("✅  Я написал свой номер заявления",callback_data="act_13"),
     )
     return keyboard
 
@@ -90,7 +93,6 @@ async def instruction():
     keyboard.add(
         InlineKeyboardButton("✅  Я написал свою почту",callback_data="act_8"),
     )
-    return keyboard
 async def trade():
     keyboard = InlineKeyboardMarkup()
     keyboard.add(
